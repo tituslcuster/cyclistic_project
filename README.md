@@ -1,8 +1,8 @@
 # Cyclystic Data Project
 
 
-Total rides in this dataset - 5,901,463
-Rides after cleaning - 5,803,962
++ Total rides in this dataset - 5,901,463
++ Rides after cleaning - 5,803,962
 
 ### Member/Casual totals
    1. Member rides: 3,379,237
