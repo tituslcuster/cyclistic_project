@@ -4,7 +4,7 @@
 Total rides in this dataset - 5,901,463
 Rides after cleaning - 5,803,962
 
-Member/Casual totals
+### Member/Casual totals
    1. Member rides: 3,379,237
    2. Casual rides: 2,522,226
 
@@ -18,7 +18,7 @@ Member/Casual totals
     WHERE member_casual = 'casual';
 ```
 
-The counts of rides by ride type are as follows:
+### The counts of rides by ride type are as follows:
 ```sql
         SELECT COUNT(rideable_type)
         FROM tripdata_21_08_22_07
@@ -31,7 +31,7 @@ The counts of rides by ride type are as follows:
 
 
 
-Members ride type breakdown
+### Members ride type breakdown
 ```sql
         SELECT COUNT(rideable_type)
             FROM tripdata_21_08_22_07
@@ -43,7 +43,7 @@ Members ride type breakdown
  3. Member electric rides: 1,456,488
 
     
-Casual ride type breakdown
+### Casual ride type breakdown
 ```sql
         SELECT COUNT(rideable_type)
         FROM tripdata_21_08_22_07
@@ -56,7 +56,7 @@ Casual ride type breakdown
 
    
 
-The top 10 longest rides
+### The top 10 longest rides
  ```sql
         SELECT 	started_at,
             ended_at,
@@ -81,7 +81,7 @@ The top 10 longest rides
 ```
    
 
-The 10 shortest rides
+### The 10 shortest rides
 ```sql
         SELECT 	started_at,
             ended_at,
@@ -105,19 +105,19 @@ The 10 shortest rides
     "2021-11-07 01:56:51"	"2021-11-07 01:00:57"	"casual"	"-00:55:54"
 ```
 
-There are 129 rides in which the end time is smaller than the start time
+### There are 129 rides in which the end time is smaller than the start time
 ```sql
     SELECT 	COUNT(*)
     FROM tripdata_21_08_22_07
 	WHERE ended_at < started_at
 ```
-I deleted these occurances and assumed this was a bug within the app given that of the 5,901,463 rows only 129 of them met this condition
+### I deleted these occurances and assumed this was a bug within the app given that of the 5,901,463 rows only 129 of them met this condition
 ```sql
         DELETE
         FROM tripdata_21_08_22_07
 	    WHERE ended_at < started_at
 ```
-I also deleted rides that were shorter that 00:00:01. There were 17,527 rides that were less than a second in length
+### I also deleted rides that were shorter that 00:00:01. There were 17,527 rides that were less than a second in length
 ```sql
         DELETE
         FROM tripdata_21_08_22_07
@@ -139,7 +139,7 @@ With this in mind I deleted all rides longer than 24 hours (4,966 in total)
         FROM tripdata_21_08_22_07
         WHERE ride_length > '24:00:00'
 ```
-Updated 10 shortest rides
+### Updated 10 shortest rides
 ```sql
         SELECT 	started_at,
             ended_at,
@@ -164,7 +164,7 @@ Updated 10 shortest rides
     "2021-08-24 16:29:00"	"2021-08-24 16:30:00"	"casual"	"00:01:00"
 ```
 
-Updated 10 longest rides
+### Updated 10 longest rides
 ```sql
         SELECT 	started_at,
             ended_at,
@@ -189,7 +189,7 @@ Updated 10 longest rides
     "2022-06-19 13:52:43"	"2022-07-11 04:23:21"	"casual"	"21 days 14:30:38"
     "2022-07-05 14:25:00"	"2022-07-27 04:31:00"	"casual"	"21 days 14:06:00"
 ```    
-Creating a 'ride_length' column for constraining against
+### Creating a 'ride_length' column for constraining against
 ```sql   
     ALTER TABLE tripdata_21_08_22_07
     ADD COLUMN ride_length interval
